@@ -1,0 +1,4 @@
+a=10
+switch(n):
+   case1:
+      n=1+1
