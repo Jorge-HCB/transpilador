@@ -13,7 +13,7 @@ void yyerror(const char *s);
     char *str;
 }
 
-%token<str> ABREP FECHAP ID STR NUM FIM_ENTRADA DOISP WHILE DO SWITCH CASE DEFAULT DIFERENTEIGUAL IGUALIGUAL IGUAL MAIS MENOS VEZES IDENTA FIM_DE_LINHA DIVIDIR
+%token<str> ABREP FECHAP ID STR NUM FIM_ENTRADA DOISP WHILE DO SWITCH CASE DEFAULT DIFERENTEIGUAL IGUALIGUAL IGUAL MAIS MENOS VEZES IDENTA FIM_DE_LINHA DIVIDIR E OU
 
 %type<str> COMANDOS COMANDO FUNCAO LOOP CONDICIONAL EXPRESSAO ATRIBUICAO VALOR COMPARACAO
 
@@ -69,6 +69,16 @@ LOOP: DO ABREP VALOR COMPARACAO VALOR FECHAP DOISP FIM_DE_LINHA IDENTA
                 $$ = malloc (1000);
                 printf("do {\n%s} while (%s %s %s);\n", $10, $3, $4, $5);
             }
+     |WHILE ABREP VALOR COMPARACAO VALOR E VALOR COMPARACAO VALOR FECHAP DOISP FIM_DE_LINHA IDENTA
+        ID IGUAL NUM FIM_DE_LINHA{
+            $$ = malloc (1000);
+            printf("while (%s %s %s && %s %s %s){\nint %s=%s;\n}\n", $3,$4,$5,$7,$8,$9,$14,$16);
+        }
+        |WHILE ABREP VALOR COMPARACAO VALOR OU VALOR COMPARACAO VALOR FECHAP DOISP FIM_DE_LINHA IDENTA
+        ID IGUAL NUM FIM_DE_LINHA{
+            $$ = malloc (1000);
+            printf("while (%s %s %s || %s %s %s){\nint %s=%s;\n}\n", $3,$4,$5,$7,$8,$9,$14,$16);
+        }
      ;
 
 CONDICIONAL: SWITCH ABREP VALOR FECHAP DOISP FIM_DE_LINHA IDENTA
@@ -176,4 +186,3 @@ extern int linenum;
 void yyerror(const char *s) {
     fprintf(stderr, "Erro: %s\n", s);
 }
-

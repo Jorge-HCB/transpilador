@@ -31,6 +31,8 @@ IDENTA {ESPACO}{ESPACO}{ESPACO}
 "("         { return ABREP; }
 ")"         { return FECHAP; }
 ":"         { return DOISP; }
+"&&"         { return E; }
+"||"         { return OU; }
 
 {LETRAS}   		     { yylval.str = strdup(yytext); return ID; }
 {STRING}                     { yylval.str = strdup(yytext); return STR; }

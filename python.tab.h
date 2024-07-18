@@ -74,7 +74,9 @@ extern int yydebug;
     VEZES = 275,                   /* VEZES  */
     IDENTA = 276,                  /* IDENTA  */
     FIM_DE_LINHA = 277,            /* FIM_DE_LINHA  */
-    DIVIDIR = 278                  /* DIVIDIR  */
+    DIVIDIR = 278,                 /* DIVIDIR  */
+    E = 279,                       /* E  */
+    OU = 280                       /* OU  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -87,7 +89,7 @@ union YYSTYPE
 
     char *str;
 
-#line 91 "python.tab.h"
+#line 93 "python.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

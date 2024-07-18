@@ -130,16 +130,18 @@ enum yysymbol_kind_t
   YYSYMBOL_IDENTA = 21,                    /* IDENTA  */
   YYSYMBOL_FIM_DE_LINHA = 22,              /* FIM_DE_LINHA  */
   YYSYMBOL_DIVIDIR = 23,                   /* DIVIDIR  */
-  YYSYMBOL_YYACCEPT = 24,                  /* $accept  */
-  YYSYMBOL_COMANDOS = 25,                  /* COMANDOS  */
-  YYSYMBOL_COMANDO = 26,                   /* COMANDO  */
-  YYSYMBOL_FUNCAO = 27,                    /* FUNCAO  */
-  YYSYMBOL_LOOP = 28,                      /* LOOP  */
-  YYSYMBOL_CONDICIONAL = 29,               /* CONDICIONAL  */
-  YYSYMBOL_EXPRESSAO = 30,                 /* EXPRESSAO  */
-  YYSYMBOL_ATRIBUICAO = 31,                /* ATRIBUICAO  */
-  YYSYMBOL_VALOR = 32,                     /* VALOR  */
-  YYSYMBOL_COMPARACAO = 33                 /* COMPARACAO  */
+  YYSYMBOL_E = 24,                         /* E  */
+  YYSYMBOL_OU = 25,                        /* OU  */
+  YYSYMBOL_YYACCEPT = 26,                  /* $accept  */
+  YYSYMBOL_COMANDOS = 27,                  /* COMANDOS  */
+  YYSYMBOL_COMANDO = 28,                   /* COMANDO  */
+  YYSYMBOL_FUNCAO = 29,                    /* FUNCAO  */
+  YYSYMBOL_LOOP = 30,                      /* LOOP  */
+  YYSYMBOL_CONDICIONAL = 31,               /* CONDICIONAL  */
+  YYSYMBOL_EXPRESSAO = 32,                 /* EXPRESSAO  */
+  YYSYMBOL_ATRIBUICAO = 33,                /* ATRIBUICAO  */
+  YYSYMBOL_VALOR = 34,                     /* VALOR  */
+  YYSYMBOL_COMPARACAO = 35                 /* COMPARACAO  */
 };
 typedef enum yysymbol_kind_t yysymbol_kind_t;
 
@@ -256,7 +258,7 @@ typedef int yytype_uint16;
 
 
 /* Stored state numbers (used for stacks). */
-typedef yytype_int8 yy_state_t;
+typedef yytype_uint8 yy_state_t;
 
 /* State numbers in computations.  */
 typedef int yy_state_fast_t;
@@ -465,21 +467,21 @@ union yyalloc
 #endif /* !YYCOPY_NEEDED */
 
 /* YYFINAL -- State number of the termination state.  */
-#define YYFINAL  16
+#define YYFINAL  18
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   108
+#define YYLAST   137
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  24
+#define YYNTOKENS  26
 /* YYNNTS -- Number of nonterminals.  */
 #define YYNNTS  10
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  33
+#define YYNRULES  35
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  104
+#define YYNSTATES  133
 
 /* YYMAXUTOK -- Last valid token kind.  */
-#define YYMAXUTOK   278
+#define YYMAXUTOK   280
 
 
 /* YYTRANSLATE(TOKEN-NUM) -- Symbol number corresponding to TOKEN-NUM
@@ -520,7 +522,8 @@ static const yytype_int8 yytranslate[] =
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
        5,     6,     7,     8,     9,    10,    11,    12,    13,    14,
-      15,    16,    17,    18,    19,    20,    21,    22,    23
+      15,    16,    17,    18,    19,    20,    21,    22,    23,    24,
+      25
 };
 
 #if YYDEBUG
@@ -528,9 +531,9 @@ static const yytype_int8 yytranslate[] =
 static const yytype_uint8 yyrline[] =
 {
        0,    25,    25,    26,    29,    30,    31,    32,    33,    37,
-      41,    47,    52,    57,    62,    67,    74,    80,    86,    92,
-      99,   105,   111,   119,   123,   127,   131,   137,   141,   147,
-     148,   149,   152,   153
+      41,    47,    52,    57,    62,    67,    72,    77,    84,    90,
+      96,   102,   109,   115,   121,   129,   133,   137,   141,   147,
+     151,   157,   158,   159,   162,   163
 };
 #endif
 
@@ -549,9 +552,9 @@ static const char *const yytname[] =
   "\"end of file\"", "error", "\"invalid token\"", "ABREP", "FECHAP",
   "ID", "STR", "NUM", "FIM_ENTRADA", "DOISP", "WHILE", "DO", "SWITCH",
   "CASE", "DEFAULT", "DIFERENTEIGUAL", "IGUALIGUAL", "IGUAL", "MAIS",
-  "MENOS", "VEZES", "IDENTA", "FIM_DE_LINHA", "DIVIDIR", "$accept",
-  "COMANDOS", "COMANDO", "FUNCAO", "LOOP", "CONDICIONAL", "EXPRESSAO",
-  "ATRIBUICAO", "VALOR", "COMPARACAO", YY_NULLPTR
+  "MENOS", "VEZES", "IDENTA", "FIM_DE_LINHA", "DIVIDIR", "E", "OU",
+  "$accept", "COMANDOS", "COMANDO", "FUNCAO", "LOOP", "CONDICIONAL",
+  "EXPRESSAO", "ATRIBUICAO", "VALOR", "COMPARACAO", YY_NULLPTR
 };
 
 static const char *
@@ -561,7 +564,7 @@ yysymbol_name (yysymbol_kind_t yysymbol)
 }
 #endif
 
-#define YYPACT_NINF (-54)
+#define YYPACT_NINF (-67)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
@@ -575,17 +578,20 @@ yysymbol_name (yysymbol_kind_t yysymbol)
    STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
-      14,     0,   -54,    11,    13,     8,    14,   -54,   -54,   -54,
-     -54,   -54,    38,     5,    41,    41,   -54,   -54,     2,   -54,
-     -54,   -54,    26,    29,   -13,    21,    48,   -54,    31,   -54,
-      47,    49,    50,   -54,    51,   -54,   -54,    41,    46,   -54,
-      37,    39,    40,    42,    56,    44,   -54,   -54,   -54,   -54,
-      54,    52,    45,     7,    53,    41,    59,    60,    61,    55,
-      58,   -54,    57,    62,    33,    63,    64,     9,    -3,    65,
-     -54,   -54,    69,    71,    73,    74,    68,    66,   -54,    67,
-      70,    72,    75,    43,    76,   -54,   -54,   -54,   -54,    77,
-      79,    15,    80,    81,    83,    84,    78,    82,    85,    86,
-     -54,   -54,   -54,   -54
+       3,     2,   -67,     4,    13,    15,    12,     3,   -67,   -67,
+     -67,   -67,   -67,    32,    17,    53,    53,    53,   -67,   -67,
+      -2,   -67,   -67,   -67,    26,    11,     9,    -6,    -6,    41,
+     -67,    28,   -67,    60,    61,    62,   -67,    63,   -67,   -67,
+      53,    53,    64,   -67,    49,    50,    52,    54,    31,    71,
+      55,   -67,   -67,   -67,   -67,    53,    53,    69,    58,    -6,
+      -6,    65,    48,    53,    53,    67,    53,    72,    76,    78,
+      79,    74,    68,    77,    80,    75,   -67,    73,    70,    81,
+      82,    57,    84,    88,    85,    86,    24,     1,    83,   -67,
+     -67,    89,    91,    90,    92,    94,    95,    93,   103,   -67,
+      96,    97,    87,    98,    99,   100,    59,   101,   104,   105,
+     -67,   -67,   -67,   -67,   102,   108,   106,   107,    34,   -67,
+     -67,   109,   110,   112,   116,   111,   113,   114,   115,   -67,
+     -67,   -67,   -67
 };
 
 /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -593,97 +599,109 @@ static const yytype_int8 yypact[] =
    means the default is an error.  */
 static const yytype_int8 yydefact[] =
 {
-       0,     0,     3,     0,     0,     0,     0,     4,     5,     6,
-       8,     7,     0,     0,     0,     0,     1,     2,     0,    29,
-      30,    31,     0,     0,     0,     0,     0,    10,     0,    28,
-       0,     0,     0,    27,     0,    33,    32,     0,     0,     9,
-       0,     0,     0,     0,     0,     0,    23,    24,    25,    26,
+       0,     0,     3,     0,     0,     0,     0,     0,     4,     5,
+       6,     8,     7,     0,     0,     0,     0,     0,     1,     2,
+       0,    31,    32,    33,     0,     0,     0,     0,     0,     0,
+      10,     0,    30,     0,     0,     0,    29,     0,    35,    34,
+       0,     0,     0,     9,     0,     0,     0,     0,     0,     0,
+       0,    25,    26,    27,    28,     0,     0,     0,     0,     0,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,    15,     0,     0,     0,     0,     0,     0,     0,     0,
-      21,    22,     0,     0,     0,     0,     0,     0,    20,     0,
-       0,     0,     0,     0,     0,    11,    13,    12,    14,     0,
+       0,     0,     0,     0,     0,     0,    15,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,    23,
+      24,     0,     0,     0,     0,     0,     0,     0,     0,    22,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-      16,    17,    18,    19
+      11,    13,    12,    14,     0,     0,     0,     0,     0,    16,
+      17,     0,     0,     0,     0,     0,     0,     0,     0,    18,
+      19,    20,    21
 };
 
 /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-     -54,    89,   -54,   -54,   -54,   -54,     6,   -53,   -14,   -54
+     -67,   118,   -67,   -67,   -67,   -67,    43,   -66,   -15,   -25
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-       0,     5,     6,     7,     8,     9,    10,    11,    22,    37
+       0,     6,     7,     8,     9,    10,    11,    12,    24,    40
 };
 
 /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
    positive, shift that token.  If negative, reduce the rule whose
    number is the opposite.  If YYTABLE_NINF, syntax error.  */
-static const yytype_int8 yytable[] =
+static const yytype_uint8 yytable[] =
 {
-      25,    26,    76,    12,    61,    30,    31,    32,    16,    33,
-      34,    23,    24,    71,    14,    78,    15,    13,    77,     1,
-      55,    56,     2,    44,    27,     3,     4,    72,    73,    74,
-      28,    33,    75,    92,    93,    94,    35,    36,    95,    23,
-      67,    58,    18,    19,    20,    21,    19,    20,    21,    23,
-      89,    29,    38,    39,    40,    45,    41,    42,    43,    46,
-      50,    47,    48,    52,    49,    60,    51,    54,    59,    69,
-      62,    84,    70,    53,    57,    64,    79,    63,    80,    65,
-      81,    82,    13,    66,    68,    83,    91,    96,    97,    85,
-      98,    99,    86,    90,    87,    17,     0,    88,     0,    33,
-     100,     0,     0,     0,   101,     0,     0,   102,   103
+      27,    28,    29,    41,    76,    13,    97,    15,     1,    38,
+      39,     2,    18,     3,     4,     5,    16,    90,    17,    14,
+      30,    99,    98,    25,    26,    48,    49,    33,    34,    35,
+      31,    36,    37,    32,    63,    64,    20,    21,    22,    23,
+      59,    60,    93,    94,    95,    42,    36,    96,    68,    69,
+      43,    71,   121,   122,   123,    55,    56,   124,    21,    22,
+      23,    66,    67,    25,    86,    25,   114,    44,    45,    46,
+      47,    51,    52,    50,    53,    57,    54,    58,    61,    62,
+      73,    72,    74,    77,    75,     0,    79,    65,    70,    80,
+      78,    83,    81,    88,   100,    82,   101,   102,     0,   103,
+      14,   104,   105,    84,    85,    87,    91,    92,   107,   110,
+     106,   116,   117,   108,   109,   118,   125,   126,   115,   127,
+     111,   112,   113,   128,    36,    19,    89,     0,   119,   120,
+       0,     0,     0,   129,     0,   130,   131,   132
 };
 
 static const yytype_int8 yycheck[] =
 {
-      14,    15,     5,     3,    57,    18,    19,    20,     0,    22,
-      23,     6,     7,    66,     3,    68,     3,    17,    21,     5,
-      13,    14,     8,    37,    22,    11,    12,    18,    19,    20,
-       4,    22,    23,    18,    19,    20,    15,    16,    23,     6,
-       7,    55,     4,     5,     6,     7,     5,     6,     7,     6,
-       7,    22,     4,    22,     7,     9,     7,     7,     7,    22,
-       4,    22,    22,     9,    22,     5,    22,    22,     9,     5,
-       9,     5,    66,    21,    21,    17,     7,    22,     7,    22,
-       7,     7,    17,    21,    21,    17,     7,     7,     7,    22,
-       7,     7,    22,    17,    22,     6,    -1,    22,    -1,    22,
-      22,    -1,    -1,    -1,    22,    -1,    -1,    22,    22
+      15,    16,    17,    28,    70,     3,     5,     3,     5,    15,
+      16,     8,     0,    10,    11,    12,     3,    83,     3,    17,
+      22,    87,    21,     6,     7,    40,    41,    18,    19,    20,
+       4,    22,    23,    22,    59,    60,     4,     5,     6,     7,
+      55,    56,    18,    19,    20,     4,    22,    23,    63,    64,
+      22,    66,    18,    19,    20,    24,    25,    23,     5,     6,
+       7,    13,    14,     6,     7,     6,     7,     7,     7,     7,
+       7,    22,    22,     9,    22,     4,    22,    22,     9,    21,
+       4,     9,     4,     9,     5,    -1,     9,    22,    21,     9,
+      22,    21,    17,     5,     5,    22,     5,     7,    -1,     7,
+      17,     7,     7,    22,    22,    21,    21,    21,     5,    22,
+      17,     7,     7,    17,    17,     7,     7,     7,    17,     7,
+      22,    22,    22,     7,    22,     7,    83,    -1,    22,    22,
+      -1,    -1,    -1,    22,    -1,    22,    22,    22
 };
 
 /* YYSTOS[STATE-NUM] -- The symbol kind of the accessing symbol of
    state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
-       0,     5,     8,    11,    12,    25,    26,    27,    28,    29,
-      30,    31,     3,    17,     3,     3,     0,    25,     4,     5,
-       6,     7,    32,     6,     7,    32,    32,    22,     4,    22,
-      18,    19,    20,    22,    23,    15,    16,    33,     4,    22,
-       7,     7,     7,     7,    32,     9,    22,    22,    22,    22,
-       4,    22,     9,    21,    22,    13,    14,    21,    32,     9,
-       5,    31,     9,    22,    17,    22,    21,     7,    21,     5,
-      30,    31,    18,    19,    20,    23,     5,    21,    31,     7,
-       7,     7,     7,    17,     5,    22,    22,    22,    22,     7,
-      17,     7,    18,    19,    20,    23,     7,     7,     7,     7,
-      22,    22,    22,    22
+       0,     5,     8,    10,    11,    12,    27,    28,    29,    30,
+      31,    32,    33,     3,    17,     3,     3,     3,     0,    27,
+       4,     5,     6,     7,    34,     6,     7,    34,    34,    34,
+      22,     4,    22,    18,    19,    20,    22,    23,    15,    16,
+      35,    35,     4,    22,     7,     7,     7,     7,    34,    34,
+       9,    22,    22,    22,    22,    24,    25,     4,    22,    34,
+      34,     9,    21,    35,    35,    22,    13,    14,    34,    34,
+      21,    34,     9,     4,     4,     5,    33,     9,    22,     9,
+       9,    17,    22,    21,    22,    22,     7,    21,     5,    32,
+      33,    21,    21,    18,    19,    20,    23,     5,    21,    33,
+       5,     5,     7,     7,     7,     7,    17,     5,    17,    17,
+      22,    22,    22,    22,     7,    17,     7,     7,     7,    22,
+      22,    18,    19,    20,    23,     7,     7,     7,     7,    22,
+      22,    22,    22
 };
 
 /* YYR1[RULE-NUM] -- Symbol kind of the left-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr1[] =
 {
-       0,    24,    25,    25,    26,    26,    26,    26,    26,    27,
-      27,    28,    28,    28,    28,    28,    29,    29,    29,    29,
-      29,    29,    29,    30,    30,    30,    30,    31,    31,    32,
-      32,    32,    33,    33
+       0,    26,    27,    27,    28,    28,    28,    28,    28,    29,
+      29,    30,    30,    30,    30,    30,    30,    30,    31,    31,
+      31,    31,    31,    31,    31,    32,    32,    32,    32,    33,
+      33,    34,    34,    34,    35,    35
 };
 
 /* YYR2[RULE-NUM] -- Number of symbols on the right-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr2[] =
 {
        0,     2,     2,     1,     1,     1,     1,     1,     1,     5,
-       4,    15,    15,    15,    15,    10,    19,    19,    19,    19,
-      13,    12,    12,     6,     6,     6,     6,     4,     4,     1,
-       1,     1,     1,     1
+       4,    15,    15,    15,    15,    10,    17,    17,    19,    19,
+      19,    19,    13,    12,    12,     6,     6,     6,     6,     4,
+       4,     1,     1,     1,     1,     1
 };
 
 
@@ -1149,19 +1167,19 @@ yyreduce:
   case 3: /* COMANDOS: FIM_ENTRADA  */
 #line 26 "python.y"
                        {return 0;}
-#line 1153 "python.tab.c"
+#line 1171 "python.tab.c"
     break;
 
   case 7: /* COMANDO: ATRIBUICAO  */
 #line 32 "python.y"
                     { printf("%s", (yyvsp[0].str)); }
-#line 1159 "python.tab.c"
+#line 1177 "python.tab.c"
     break;
 
   case 8: /* COMANDO: EXPRESSAO  */
 #line 33 "python.y"
                    { printf("%s", (yyvsp[0].str)); }
-#line 1165 "python.tab.c"
+#line 1183 "python.tab.c"
     break;
 
   case 9: /* FUNCAO: ID ABREP VALOR FECHAP FIM_DE_LINHA  */
@@ -1170,7 +1188,7 @@ yyreduce:
             (yyval.str) = malloc (1000);
             printf("int %s(int %s);\n", (yyvsp[-4].str), (yyvsp[-2].str));
         }
-#line 1174 "python.tab.c"
+#line 1192 "python.tab.c"
     break;
 
   case 10: /* FUNCAO: ID ABREP FECHAP FIM_DE_LINHA  */
@@ -1179,7 +1197,7 @@ yyreduce:
             (yyval.str) = malloc (1000);
             printf("int %s();\n", (yyvsp[-3].str));
         }
-#line 1183 "python.tab.c"
+#line 1201 "python.tab.c"
     break;
 
   case 11: /* LOOP: DO ABREP VALOR COMPARACAO VALOR FECHAP DOISP FIM_DE_LINHA IDENTA ID IGUAL NUM MAIS NUM FIM_DE_LINHA  */
@@ -1188,7 +1206,7 @@ yyreduce:
                 (yyval.str) = malloc (1000);
                 printf("do {\nint %s=%s+%s} while (%s %s %s);\n", (yyvsp[-5].str),(yyvsp[-3].str),(yyvsp[-1].str), (yyvsp[-12].str), (yyvsp[-11].str), (yyvsp[-10].str));
             }
-#line 1192 "python.tab.c"
+#line 1210 "python.tab.c"
     break;
 
   case 12: /* LOOP: DO ABREP VALOR COMPARACAO VALOR FECHAP DOISP FIM_DE_LINHA IDENTA ID IGUAL NUM VEZES NUM FIM_DE_LINHA  */
@@ -1197,7 +1215,7 @@ yyreduce:
                 (yyval.str) = malloc (1000);
                 printf("do {\nint %s=%s*%s} while (%s %s %s);\n", (yyvsp[-5].str),(yyvsp[-3].str),(yyvsp[-1].str), (yyvsp[-12].str), (yyvsp[-11].str), (yyvsp[-10].str));
             }
-#line 1201 "python.tab.c"
+#line 1219 "python.tab.c"
     break;
 
   case 13: /* LOOP: DO ABREP VALOR COMPARACAO VALOR FECHAP DOISP FIM_DE_LINHA IDENTA ID IGUAL NUM MENOS NUM FIM_DE_LINHA  */
@@ -1206,7 +1224,7 @@ yyreduce:
                 (yyval.str) = malloc (1000);
                 printf("do {\nint %s=%s-%s} while (%s %s %s);\n", (yyvsp[-5].str),(yyvsp[-3].str),(yyvsp[-1].str), (yyvsp[-12].str), (yyvsp[-11].str), (yyvsp[-10].str));
             }
-#line 1210 "python.tab.c"
+#line 1228 "python.tab.c"
     break;
 
   case 14: /* LOOP: DO ABREP VALOR COMPARACAO VALOR FECHAP DOISP FIM_DE_LINHA IDENTA ID IGUAL NUM DIVIDIR NUM FIM_DE_LINHA  */
@@ -1215,7 +1233,7 @@ yyreduce:
                 (yyval.str) = malloc (1000);
                 printf("do {\nint %s=%s/%s} while (%s %s %s);\n", (yyvsp[-5].str),(yyvsp[-3].str),(yyvsp[-1].str), (yyvsp[-12].str), (yyvsp[-11].str), (yyvsp[-10].str));
             }
-#line 1219 "python.tab.c"
+#line 1237 "python.tab.c"
     break;
 
   case 15: /* LOOP: DO ABREP VALOR COMPARACAO VALOR FECHAP DOISP FIM_DE_LINHA IDENTA ATRIBUICAO  */
@@ -1224,158 +1242,176 @@ yyreduce:
                 (yyval.str) = malloc (1000);
                 printf("do {\n%s} while (%s %s %s);\n", (yyvsp[0].str), (yyvsp[-7].str), (yyvsp[-6].str), (yyvsp[-5].str));
             }
-#line 1228 "python.tab.c"
+#line 1246 "python.tab.c"
     break;
 
-  case 16: /* CONDICIONAL: SWITCH ABREP VALOR FECHAP DOISP FIM_DE_LINHA IDENTA CASE VALOR DOISP FIM_DE_LINHA IDENTA IDENTA ID IGUAL NUM MAIS NUM FIM_DE_LINHA  */
-#line 76 "python.y"
+  case 16: /* LOOP: WHILE ABREP VALOR COMPARACAO VALOR E VALOR COMPARACAO VALOR FECHAP DOISP FIM_DE_LINHA IDENTA ID IGUAL NUM FIM_DE_LINHA  */
+#line 73 "python.y"
+                                 {
+            (yyval.str) = malloc (1000);
+            printf("while (%s %s %s && %s %s %s){\nint %s=%s;\n}\n", (yyvsp[-14].str),(yyvsp[-13].str),(yyvsp[-12].str),(yyvsp[-10].str),(yyvsp[-9].str),(yyvsp[-8].str),(yyvsp[-3].str),(yyvsp[-1].str));
+        }
+#line 1255 "python.tab.c"
+    break;
+
+  case 17: /* LOOP: WHILE ABREP VALOR COMPARACAO VALOR OU VALOR COMPARACAO VALOR FECHAP DOISP FIM_DE_LINHA IDENTA ID IGUAL NUM FIM_DE_LINHA  */
+#line 78 "python.y"
+                                 {
+            (yyval.str) = malloc (1000);
+            printf("while (%s %s %s || %s %s %s){\nint %s=%s;\n}\n", (yyvsp[-14].str),(yyvsp[-13].str),(yyvsp[-12].str),(yyvsp[-10].str),(yyvsp[-9].str),(yyvsp[-8].str),(yyvsp[-3].str),(yyvsp[-1].str));
+        }
+#line 1264 "python.tab.c"
+    break;
+
+  case 18: /* CONDICIONAL: SWITCH ABREP VALOR FECHAP DOISP FIM_DE_LINHA IDENTA CASE VALOR DOISP FIM_DE_LINHA IDENTA IDENTA ID IGUAL NUM MAIS NUM FIM_DE_LINHA  */
+#line 86 "python.y"
                                                    {
                     (yyval.str) = malloc (10000);
                     printf("switch (%s) {\ncase %s:\nint %s=%s+%s;\n}\n", (yyvsp[-16].str), (yyvsp[-10].str), (yyvsp[-5].str),(yyvsp[-4].str),(yyvsp[-3].str));
                 }
-#line 1237 "python.tab.c"
+#line 1273 "python.tab.c"
     break;
 
-  case 17: /* CONDICIONAL: SWITCH ABREP VALOR FECHAP DOISP FIM_DE_LINHA IDENTA CASE VALOR DOISP FIM_DE_LINHA IDENTA IDENTA ID IGUAL NUM MENOS NUM FIM_DE_LINHA  */
-#line 82 "python.y"
+  case 19: /* CONDICIONAL: SWITCH ABREP VALOR FECHAP DOISP FIM_DE_LINHA IDENTA CASE VALOR DOISP FIM_DE_LINHA IDENTA IDENTA ID IGUAL NUM MENOS NUM FIM_DE_LINHA  */
+#line 92 "python.y"
                                                     {
                     (yyval.str) = malloc (10000);
                     printf("switch (%s) {\ncase %s:\nint %s=%s-%s;\n}\n", (yyvsp[-16].str), (yyvsp[-10].str), (yyvsp[-5].str),(yyvsp[-4].str),(yyvsp[-3].str));
                 }
-#line 1246 "python.tab.c"
+#line 1282 "python.tab.c"
     break;
 
-  case 18: /* CONDICIONAL: SWITCH ABREP VALOR FECHAP DOISP FIM_DE_LINHA IDENTA CASE VALOR DOISP FIM_DE_LINHA IDENTA IDENTA ID IGUAL NUM VEZES NUM FIM_DE_LINHA  */
-#line 88 "python.y"
+  case 20: /* CONDICIONAL: SWITCH ABREP VALOR FECHAP DOISP FIM_DE_LINHA IDENTA CASE VALOR DOISP FIM_DE_LINHA IDENTA IDENTA ID IGUAL NUM VEZES NUM FIM_DE_LINHA  */
+#line 98 "python.y"
                                                     {
                     (yyval.str) = malloc (10000);
                     printf("switch (%s) {\ncase %s:\nint %s=%s*%s;\n}\n", (yyvsp[-16].str), (yyvsp[-10].str), (yyvsp[-5].str),(yyvsp[-4].str),(yyvsp[-3].str));
                 }
-#line 1255 "python.tab.c"
+#line 1291 "python.tab.c"
     break;
 
-  case 19: /* CONDICIONAL: SWITCH ABREP VALOR FECHAP DOISP FIM_DE_LINHA IDENTA CASE VALOR DOISP FIM_DE_LINHA IDENTA IDENTA ID IGUAL NUM DIVIDIR NUM FIM_DE_LINHA  */
-#line 94 "python.y"
+  case 21: /* CONDICIONAL: SWITCH ABREP VALOR FECHAP DOISP FIM_DE_LINHA IDENTA CASE VALOR DOISP FIM_DE_LINHA IDENTA IDENTA ID IGUAL NUM DIVIDIR NUM FIM_DE_LINHA  */
+#line 104 "python.y"
                                                       {
                     (yyval.str) = malloc (10000);
                     printf("switch (%s) {\ncase %s:\nint %s=%s/%s;\n}\n", (yyvsp[-16].str), (yyvsp[-10].str), (yyvsp[-5].str),(yyvsp[-4].str),(yyvsp[-3].str));
                 }
-#line 1264 "python.tab.c"
+#line 1300 "python.tab.c"
     break;
 
-  case 20: /* CONDICIONAL: SWITCH ABREP VALOR FECHAP DOISP FIM_DE_LINHA IDENTA CASE VALOR DOISP FIM_DE_LINHA IDENTA ATRIBUICAO  */
-#line 101 "python.y"
+  case 22: /* CONDICIONAL: SWITCH ABREP VALOR FECHAP DOISP FIM_DE_LINHA IDENTA CASE VALOR DOISP FIM_DE_LINHA IDENTA ATRIBUICAO  */
+#line 111 "python.y"
                            {
                     (yyval.str) = malloc (10000);
                     printf("switch (%s) {\n%s    case %s:\n%s\n}\n", (yyvsp[-10].str), (yyvsp[-7].str), (yyvsp[-8].str), (yyvsp[0].str));
                 }
-#line 1273 "python.tab.c"
+#line 1309 "python.tab.c"
     break;
 
-  case 21: /* CONDICIONAL: SWITCH ABREP VALOR FECHAP DOISP FIM_DE_LINHA IDENTA DEFAULT DOISP FIM_DE_LINHA IDENTA EXPRESSAO  */
-#line 107 "python.y"
+  case 23: /* CONDICIONAL: SWITCH ABREP VALOR FECHAP DOISP FIM_DE_LINHA IDENTA DEFAULT DOISP FIM_DE_LINHA IDENTA EXPRESSAO  */
+#line 117 "python.y"
                           {
                     (yyval.str) = malloc (1000);
                     printf("switch (%s) {\n%s    default:\n%s}\n", (yyvsp[-9].str), (yyvsp[-6].str), (yyvsp[0].str));
                 }
-#line 1282 "python.tab.c"
+#line 1318 "python.tab.c"
     break;
 
-  case 22: /* CONDICIONAL: SWITCH ABREP VALOR FECHAP DOISP FIM_DE_LINHA IDENTA DEFAULT DOISP FIM_DE_LINHA IDENTA ATRIBUICAO  */
-#line 113 "python.y"
+  case 24: /* CONDICIONAL: SWITCH ABREP VALOR FECHAP DOISP FIM_DE_LINHA IDENTA DEFAULT DOISP FIM_DE_LINHA IDENTA ATRIBUICAO  */
+#line 123 "python.y"
                            {
                     (yyval.str) = malloc (1000);
                     printf("switch (%s) {\n%s    default:\n%s}\n", (yyvsp[-9].str), (yyvsp[-6].str), (yyvsp[0].str));
                 }
-#line 1291 "python.tab.c"
+#line 1327 "python.tab.c"
     break;
 
-  case 23: /* EXPRESSAO: ID IGUAL NUM MAIS NUM FIM_DE_LINHA  */
-#line 119 "python.y"
+  case 25: /* EXPRESSAO: ID IGUAL NUM MAIS NUM FIM_DE_LINHA  */
+#line 129 "python.y"
                                               {
                 (yyval.str) = malloc (1000);
                 printf("int %s = %s + %s;\n", (yyvsp[-5].str), (yyvsp[-3].str), (yyvsp[-1].str));
             }
-#line 1300 "python.tab.c"
+#line 1336 "python.tab.c"
     break;
 
-  case 24: /* EXPRESSAO: ID IGUAL NUM MENOS NUM FIM_DE_LINHA  */
-#line 123 "python.y"
+  case 26: /* EXPRESSAO: ID IGUAL NUM MENOS NUM FIM_DE_LINHA  */
+#line 133 "python.y"
                                                {
                 (yyval.str) = malloc (1000);
                 printf("int %s = %s - %s;\n", (yyvsp[-5].str), (yyvsp[-3].str), (yyvsp[-1].str));
             }
-#line 1309 "python.tab.c"
+#line 1345 "python.tab.c"
     break;
 
-  case 25: /* EXPRESSAO: ID IGUAL NUM VEZES NUM FIM_DE_LINHA  */
-#line 127 "python.y"
+  case 27: /* EXPRESSAO: ID IGUAL NUM VEZES NUM FIM_DE_LINHA  */
+#line 137 "python.y"
                                                {
                 (yyval.str) = malloc (1000);
                 printf("int %s = %s * %s;\n", (yyvsp[-5].str), (yyvsp[-3].str), (yyvsp[-1].str));
             }
-#line 1318 "python.tab.c"
+#line 1354 "python.tab.c"
     break;
 
-  case 26: /* EXPRESSAO: ID IGUAL NUM DIVIDIR NUM FIM_DE_LINHA  */
-#line 131 "python.y"
+  case 28: /* EXPRESSAO: ID IGUAL NUM DIVIDIR NUM FIM_DE_LINHA  */
+#line 141 "python.y"
                                                  {
                 (yyval.str) = malloc (1000);
                 printf("int %s = %s / %s;\n", (yyvsp[-5].str), (yyvsp[-3].str), (yyvsp[-1].str));
             }
-#line 1327 "python.tab.c"
+#line 1363 "python.tab.c"
     break;
 
-  case 27: /* ATRIBUICAO: ID IGUAL NUM FIM_DE_LINHA  */
-#line 137 "python.y"
+  case 29: /* ATRIBUICAO: ID IGUAL NUM FIM_DE_LINHA  */
+#line 147 "python.y"
                                       {
 	        (yyval.str) = malloc (1000);
                 printf("int %s = %s;\n", (yyvsp[-3].str), (yyvsp[-1].str));
             }
-#line 1336 "python.tab.c"
+#line 1372 "python.tab.c"
     break;
 
-  case 28: /* ATRIBUICAO: ID IGUAL STR FIM_DE_LINHA  */
-#line 141 "python.y"
+  case 30: /* ATRIBUICAO: ID IGUAL STR FIM_DE_LINHA  */
+#line 151 "python.y"
                                       {
                 (yyval.str) = malloc (1000);
                 printf("char %s[] = %s;\n", (yyvsp[-3].str), (yyvsp[-1].str));
             }
-#line 1345 "python.tab.c"
+#line 1381 "python.tab.c"
     break;
 
-  case 29: /* VALOR: ID  */
-#line 147 "python.y"
+  case 31: /* VALOR: ID  */
+#line 157 "python.y"
           { (yyval.str) = (yyvsp[0].str); }
-#line 1351 "python.tab.c"
+#line 1387 "python.tab.c"
     break;
 
-  case 30: /* VALOR: STR  */
-#line 148 "python.y"
+  case 32: /* VALOR: STR  */
+#line 158 "python.y"
             { (yyval.str) = (yyvsp[0].str); }
-#line 1357 "python.tab.c"
+#line 1393 "python.tab.c"
     break;
 
-  case 31: /* VALOR: NUM  */
-#line 149 "python.y"
+  case 33: /* VALOR: NUM  */
+#line 159 "python.y"
             { (yyval.str) = (yyvsp[0].str); }
-#line 1363 "python.tab.c"
+#line 1399 "python.tab.c"
     break;
 
-  case 32: /* COMPARACAO: IGUALIGUAL  */
-#line 152 "python.y"
+  case 34: /* COMPARACAO: IGUALIGUAL  */
+#line 162 "python.y"
                        { (yyval.str) = "==";}
-#line 1369 "python.tab.c"
+#line 1405 "python.tab.c"
     break;
 
-  case 33: /* COMPARACAO: DIFERENTEIGUAL  */
-#line 153 "python.y"
+  case 35: /* COMPARACAO: DIFERENTEIGUAL  */
+#line 163 "python.y"
                          { (yyval.str) = "!=";}
-#line 1375 "python.tab.c"
+#line 1411 "python.tab.c"
     break;
 
 
-#line 1379 "python.tab.c"
+#line 1415 "python.tab.c"
 
       default: break;
     }
@@ -1568,7 +1604,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 155 "python.y"
+#line 165 "python.y"
 
 int main(int argc, char **argv) {
     if (argc != 2) {
@@ -1593,4 +1629,3 @@ extern int linenum;
 void yyerror(const char *s) {
     fprintf(stderr, "Erro: %s\n", s);
 }
-
