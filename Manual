@@ -1,0 +1,10 @@
+1º coloque os três arquivos (python.l python.y e exemplo.print) numa mesma pasta
+
+2º execute no terminal (linux) os comandos a seguir para gerar os arquivos lex.yy.c python.tab.c python.tab.h e transpilador (caso não gere todos os arquivos, uma cópia estará disponível para baixar)
+bison -d python.y
+flex python.l
+cc python.tab.c lex.yy.c -o transpilador -lfl
+
+3º altere o exemplo.print para fazer os testes do transpilador
+
+4º execute no terminal o comando ./transpilador exemplo.print que obterá como resposta o código transpilado
